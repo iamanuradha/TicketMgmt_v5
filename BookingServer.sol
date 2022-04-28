@@ -49,7 +49,7 @@ contract BookingServer {
         _;
     }
 
-    modifier onlyValidFLightNumberAndState(string memory _flightNumber) {
+    modifier onlyValidFlightNumberAndState(string memory _flightNumber) {
         Flight.FlightData memory flightData = flight.getFlightData(_flightNumber);
          require(bytes(flightData.flightNumber).length > 0, "Invalid flight number");
         require(flightData.state != Flight.FlightState.CANCELLED, "Flight is Cancelled");
@@ -77,7 +77,7 @@ contract BookingServer {
         public 
         payable 
         onlyCustomer
-		onlyValidFLightNumberAndState(_flightNumber)
+		onlyValidFlightNumberAndState(_flightNumber)
 		onlySufficientFunds
         onlyExactTicketAmount(_flightNumber) returns(string memory){
 		
@@ -105,7 +105,7 @@ contract BookingServer {
         public 
         payable
 		onlyAirlines
-        onlyValidFLightNumberAndState(_flightNumber) 
+        onlyValidFlightNumberAndState(_flightNumber) 
         onlyValidFlightNumber(_flightNumber) {
         
         flight.setFlightState(_flightNumber, Flight.FlightState.CANCELLED);
