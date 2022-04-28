@@ -11,7 +11,7 @@ contract Flight {
 
     struct FlightData {
         string flightNumber;
-        string flightTime;
+        uint flightTime;
         string from;
         string to;
         FlightState state;
@@ -25,9 +25,9 @@ contract Flight {
 	/// Populates flights for the airlines
 	/// @dev store flight data to flightsMap
     function populateFlights() public {
-        flightsMap['EA007'] = FlightData("EA007", "15-05-2022 10:30", "LON", "HYD", FlightState.ON_TIME, 10);
-        flightsMap['EA001'] = FlightData("EA001", "17-05-2022 10:30", "DXB", "HYD", FlightState.CANCELLED, 10);
-        flightsMap['EA002'] = FlightData("EA002", "24-05-2022 10:30", "HYD", "LON", FlightState.DELAYED, 10);
+        flightsMap['EA007'] = FlightData("EA007", 1652590800, "LON", "HYD", FlightState.ON_TIME, 10);
+        flightsMap['EA001'] = FlightData("EA001", 1652763600, "DXB", "HYD", FlightState.CANCELLED, 10);
+        flightsMap['EA002'] = FlightData("EA002", 1653368400, "HYD", "LON", FlightState.DELAYED, 10);
     }
 
 	/// Get flight data for given airlines and flightNumber
