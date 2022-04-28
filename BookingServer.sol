@@ -119,8 +119,11 @@ contract BookingServer {
     function updateFlightStatus(string memory _flightNumber, Flight.FlightState _state) 
 		public 
 		onlyAirlines 
-		onlyValidFlightNumber(_flightNumber){
-		
+		onlyValidFlightNumber(_flightNumber) {
+        
+        uint flightStartTime = flight.getFlightData(_flightNumber).flightTime;
+        require (block.timestamp < flightStartTime - (24 * 60 * 60), 
+        "Updates permitted 24 hrs before flight departure time");
         flight.setFlightState(_flightNumber, _state);
     }
 
@@ -129,5 +132,4 @@ contract BookingServer {
         onlyValidFlightNumber(_flightNumber) returns (Flight.FlightData memory) {
         return flight.getFlightData(_flightNumber);
     }
-
 }
